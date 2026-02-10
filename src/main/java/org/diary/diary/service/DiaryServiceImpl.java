@@ -44,6 +44,11 @@ public class DiaryServiceImpl implements DiaryService {
     }
     return diaryDTO;
   }
+  //삭제
+  @Override
+  public void delete(long no) {
+    diaryRepository.deleteById(no);
+  }
 
   
 

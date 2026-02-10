@@ -43,10 +43,17 @@ public String register(DiaryDTO diaryDTO){
   diaryService.register(diaryDTO);
   return"redirect:/diary/list";
 }
-//글 상세보기 가기 
-@GetMapping("/read")
+//글 상세보기 가기,수정 가기 
+@GetMapping({"/read","/modify"})
 public void read(@RequestParam("no") long no,Model model){
   DiaryDTO diaryDTO = diaryService.read(no);
   model.addAttribute("dto",diaryDTO);
 }
+//글 삭제 
+@GetMapping("/delete")
+public String delete(@RequestParam("no") long no){
+diaryService.delete(no);
+return"redirect:/diary/list";
+}
+
 }

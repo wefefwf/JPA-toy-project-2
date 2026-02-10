@@ -1,32 +1,155 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>list</title>
-  <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <title>나의 일기장</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fffdf5;      /* 배경: 부드러운 크림색 */
+      --diary-white: #ffffff;
+      --point-color: #8e9775;   /* 차분한 올리브 그린 */
+      --text-color: #5d5d5d;
+      --date-color: #a8a8a8;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Noto Serif KR', serif; /* 일기장 느낌을 위해 명조체 계열 사용 */
+      color: var(--text-color);
+      padding-bottom: 50px;
+    }
+
+    .header-section {
+      text-align: center;
+      margin: 60px 0 40px;
+    }
+
+    .header-section h1 {
+      font-weight: 700;
+      color: var(--point-color);
+      letter-spacing: -1px;
+    }
+
+    /* 일기 카드 스타일 */
+    .diary-item {
+      background: var(--diary-white);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.02);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .diary-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(142, 151, 117, 0.2);
+    }
+
+    /* 카드 상단 번호 장식 */
+    .diary-no {
+      font-size: 0.75rem;
+      color: var(--point-color);
+      font-weight: bold;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+
+    .diary-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .diary-link {
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .diary-link:hover {
+      color: var(--point-color);
+    }
+
+    .diary-date {
+      font-size: 0.85rem;
+      color: var(--date-color);
+      border-top: 1px dashed #eee;
+      padding-top: 15px;
+      margin-top: auto;
+    }
+
+    /* 글쓰기 버튼 */
+    .btn-write {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background-color: var(--point-color);
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 10px 25px rgba(142, 151, 117, 0.4);
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-write:hover {
+      transform: rotate(90deg) scale(1.1);
+      color: white;
+      background-color: #7a8463;
+    }
+
+    /* 장식용 이모지 */
+    .diary-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class ="container">
-    <h1>List</h1>
-    <table class = "table table-bordered">
-      <tr>
-        <th style = "width:50px;">no</th>
-        <th >제목</th>
-        <th style = "width:300px;">날짜</th>
-      </tr>
-      <tr th:each = "dto : ${list}">
-        <td>[[${dto.no}]]</td> 
-        <td><a th:href = "@{/diary/read(no=${dto.no})}" class="text-dark text-decoration-none">[[${dto.title}]]</a></td> 
-        <td th:text="${#temporals.format(dto.wdate,'yyyy-MM-dd HH:mm')}"></td> 
-      </tr>
-    </table>
-    <div>
-      <a th:href = "@{/diary/register}" class = "btn btn-primary">글쓰기</a>
+
+  <div class="container">
+    <div class="header-section">
+      <h1>Diary</h1>
+      <p class="text-muted">소중한 순간들을 기록하는 나만의 일기장</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" th:each="dto : ${list}">
+        <div class="diary-item">
+          <div>
+            <div class="diary-no">No. [[${dto.no}]]</div>
+            <h2 class="diary-title">
+              <a th:href="@{/diary/read(no=${dto.no})}" class="diary-link">
+                [[${dto.title}]]
+              </a>
+            </h2>
+          </div>
+          <div class="diary-date">
+            <span>🗓 [[${#temporals.format(dto.wdate,'yyyy년 MM월 dd일')}]]</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <a th:href="@{/diary/register}" class="btn-write" title="일기 쓰기">
+    ✎
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

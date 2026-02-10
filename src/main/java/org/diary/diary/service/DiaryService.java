@@ -16,7 +16,8 @@ void register(DiaryDTO diaryDTO);
 //상세 하나 읽기
 DiaryDTO read(long no);
 
-
+//삭ㅈㅔ
+void delete(long no);
 
 
 

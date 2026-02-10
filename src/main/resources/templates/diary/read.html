@@ -43,10 +43,11 @@
         </tr>
       </table>
       <div>
+      <div>
         <a th:href="@{/diary/modify(no=${dto.no})}" class = "btn btn-primary">수정</a>
         <a href="#" class = "btn btn-primary" th:onclick="|deleteDiary(${dto.no})|">삭제</a>
+        <a th:href="@{/diary/list}" class = "btn btn-primary">목록</a>
       </div>
-
   </div>
 </body>
 </html>

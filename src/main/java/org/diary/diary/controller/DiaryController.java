@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -55,5 +56,11 @@ public String delete(@RequestParam("no") long no){
 diaryService.delete(no);
 return"redirect:/diary/list";
 }
-
+//글 수정 처리
+@PostMapping("/modify")
+public String modify(DiaryDTO diaryDTO, RedirectAttributes re){
+  diaryService.modify(diaryDTO);
+  re.addAttribute("no",diaryDTO.getNo());
+  return "redirect:/diary/read";
+}
 }

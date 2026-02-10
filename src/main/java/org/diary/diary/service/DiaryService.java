@@ -19,6 +19,8 @@ DiaryDTO read(long no);
 //삭ㅈㅔ
 void delete(long no);
 
+//수정
+void modify(DiaryDTO diaryDTO);
 
 
 //dto to entitiy

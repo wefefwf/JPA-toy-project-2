@@ -17,13 +17,15 @@
 </script>
 </head>
 <body>
+  <form method = "post"> 
   <div class = "container">
     <h1 class = "my-3">Read</h1>
-    <form action = "method">
+    <form method = "method">
       <table class="table table-bordered w-75">
         <tr>
           <th>no</th>
           <td>[[${dto.no}]]</td>
+          <input type="hidden" name="no" th:value="${dto.no}" />
         </tr>
         <tr>
           <th>제목</th>
@@ -44,7 +46,7 @@
         </tr>
       </table>
       <div>
-        <button type="submit" class="btn-submit">수정</button>
+        <button type="submit" class="btn btn-primary">수정</button>
         <a th:href="@{/diary/read(no=${dto.no})}">취소</a>
       </div>
     </form>

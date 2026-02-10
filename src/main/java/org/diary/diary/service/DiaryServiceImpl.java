@@ -49,6 +49,21 @@ public class DiaryServiceImpl implements DiaryService {
   public void delete(long no) {
     diaryRepository.deleteById(no);
   }
+  //수정
+  @Override
+  public void modify(DiaryDTO diaryDTO) {
+   //일단 번호로 하나 가져와서 change로 수정 후 save
+   Optional<Diary> result = diaryRepository.findById(diaryDTO.getNo());
+   if(result.isPresent()){
+    Diary diary = result.get();
+    diary.ChangeTitle(diaryDTO.getTitle());
+    diary.ChangeContent(diaryDTO.getContent());
+    diary.ChangeWeather(diaryDTO.getWeather());
+    diary.ChangeLocalDateTime(diaryDTO.getWdate());
+    diaryRepository.save(diary);
+   }
+    
+  }
 
   
 

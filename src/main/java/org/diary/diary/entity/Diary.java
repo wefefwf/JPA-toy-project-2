@@ -33,4 +33,19 @@ public class Diary {
 
   private LocalDateTime wdate;
 
+  public void ChangeTitle(String title){
+    this.title = title;
+  }
+
+  public void ChangeContent(String content){
+    this.content = content;
+  }
+
+  public void ChangeWeather(String weather){
+    this.weather = weather;
+  }
+
+  public void ChangeLocalDateTime(LocalDateTime wdate){
+    this.wdate = wdate;
+  }
 }

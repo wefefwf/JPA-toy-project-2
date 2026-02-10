@@ -3,71 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>나의 일기장</title>
+  <title>나의 비밀 스케치북</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg-color: #fffdf5;      /* 배경: 부드러운 크림색 */
       --diary-white: #ffffff;
-      --point-color: #8e9775;   /* 차분한 올리브 그린 */
-      --text-color: #5d5d5d;
-      --date-color: #a8a8a8;
+      --point-color: #ff8a8a;   /* 귀여운 코랄 핑크로 포인트 */
+      --line-color: #e5e5e5;    /* 모눈종이 선 색상 */
+      --text-color: #4a4a4a;
     }
 
     body {
       background-color: var(--bg-color);
-      font-family: 'Noto Serif KR', serif; /* 일기장 느낌을 위해 명조체 계열 사용 */
+      /* 모눈종이 패턴 배경 */
+      background-image: 
+        linear-gradient(var(--line-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
+      background-size: 25px 25px;
+      font-family: 'Gamja Flower', cursive; /* 더 어린이 같은 손글씨체 */
       color: var(--text-color);
-      padding-bottom: 50px;
+      padding-bottom: 80px;
     }
 
     .header-section {
       text-align: center;
-      margin: 60px 0 40px;
+      margin: 60px 0 50px;
     }
 
     .header-section h1 {
+      font-family: 'Gaegu', cursive;
+      font-size: 3.5rem;
       font-weight: 700;
       color: var(--point-color);
-      letter-spacing: -1px;
+      text-shadow: 2px 2px 0px #ffdfdf;
+      margin-bottom: 10px;
     }
 
-    /* 일기 카드 스타일 */
+    /* 일기 카드 (스케치북 종이 느낌) */
     .diary-item {
       background: var(--diary-white);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border-radius: 5px; /* 약간 각진 종이 느낌 */
+      padding: 30px 25px 20px;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
       transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.02);
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       position: relative;
+      border-left: 15px solid #eee; /* 스프링 구멍이 뚫리는 왼쪽 여백 */
+    }
+
+    /* 스프링 구멍 효과 */
+    .diary-item::after {
+      content: '●\000a●\000a●\000a●';
+      white-space: pre;
+      position: absolute;
+      left: -12px;
+      top: 15px;
+      color: var(--bg-color);
+      font-size: 12px;
+      line-height: 2.5;
+    }
+
+    /* 상단 마스킹 테이프 효과 */
+    .tape-deco {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 100px;
+      height: 30px;
+      background: rgba(255, 203, 203, 0.6);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.02);
+      z-index: 10;
     }
 
     .diary-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(142, 151, 117, 0.2);
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
     }
 
-    /* 카드 상단 번호 장식 */
     .diary-no {
-      font-size: 0.75rem;
-      color: var(--point-color);
-      font-weight: bold;
-      margin-bottom: 10px;
-      opacity: 0.6;
+      font-size: 0.9rem;
+      color: #999;
+      margin-bottom: 5px;
     }
 
     .diary-title {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 15px;
-      line-height: 1.4;
     }
 
     .diary-link {
@@ -75,47 +103,44 @@
       color: var(--text-color);
     }
 
-    .diary-link:hover {
-      color: var(--point-color);
-    }
-
     .diary-date {
-      font-size: 0.85rem;
-      color: var(--date-color);
-      border-top: 1px dashed #eee;
-      padding-top: 15px;
+      font-size: 1.1rem;
+      color: #888;
       margin-top: auto;
+      text-align: right;
+      border-top: 2px dotted #eee;
+      padding-top: 10px;
     }
 
-    /* 글쓰기 버튼 */
+    /* 글쓰기 버튼 (연필 느낌) */
     .btn-write {
       position: fixed;
       bottom: 40px;
       right: 40px;
-      background-color: var(--point-color);
-      color: white;
-      width: 70px;
-      height: 70px;
+      background-color: #ffd93d; /* 노란 연필색 */
+      color: #444;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 10px 25px rgba(142, 151, 117, 0.4);
+      font-size: 2rem;
+      box-shadow: 4px 4px 15px rgba(0,0,0,0.1);
       transition: all 0.3s;
       text-decoration: none;
+      border: 3px solid #fff;
     }
 
     .btn-write:hover {
-      transform: rotate(90deg) scale(1.1);
-      color: white;
-      background-color: #7a8463;
+      transform: scale(1.1) rotate(15deg);
+      background-color: #ffc107;
+      color: #000;
     }
 
-    /* 장식용 이모지 */
-    .diary-icon {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+    /* 반응형 간격 조정 */
+    .row {
+      padding: 0 15px;
     }
   </style>
 </head>
@@ -123,13 +148,15 @@
 
   <div class="container">
     <div class="header-section">
-      <h1>Diary</h1>
-      <p class="text-muted">소중한 순간들을 기록하는 나만의 일기장</p>
+      <h1>My Sketchbook</h1>
+      <p>오늘 하루는 어떤 색이었나요? 🎨</p>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-5">
       <div class="col-md-6 col-lg-4" th:each="dto : ${list}">
         <div class="diary-item">
+          <div class="tape-deco"></div>
+          
           <div>
             <div class="diary-no">No. [[${dto.no}]]</div>
             <h2 class="diary-title">
@@ -138,8 +165,9 @@
               </a>
             </h2>
           </div>
+          
           <div class="diary-date">
-            <span>🗓 [[${#temporals.format(dto.wdate,'yyyy년 MM월 dd일')}]]</span>
+            <span>🖍 [[${#temporals.format(dto.wdate,'yyyy년 MM월 dd일')}]]</span>
           </div>
         </div>
       </div>
@@ -147,7 +175,7 @@
   </div>
 
   <a th:href="@{/diary/register}" class="btn-write" title="일기 쓰기">
-    ✎
+    ✏️
   </a>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

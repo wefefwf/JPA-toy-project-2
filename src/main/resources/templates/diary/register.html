@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일기 쓰기 - 나의 스케치북</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gamja+Flower&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #fffdf5;
@@ -17,20 +17,17 @@
       background-color: var(--bg-color);
       background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
       background-size: 25px 25px;
-      font-family: 'Gamja Flower', cursive;
+      font-family: 'Noto Sans KR', sans-serif;
       padding: 50px 0;
     }
     .container { max-width: 800px; position: relative; }
 
-    /* ✏️ 연필 세트 (상세페이지와 통일) */
-    .pencil-case {
-      position: absolute; top: -20px; right: -60px;
-      width: 34px; height: 420px; transform: rotate(15deg); z-index: 100;
+    /* 🖊 SVG 볼펜 */
+    .pen-decoration {
+      position: absolute; top: -20px; right: -80px;
+      transform: rotate(15deg); z-index: 100;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.10));
     }
-    .pencil-eraser { width: 100%; height: 45px; background: #ffadd2; border-radius: 8px 8px 0 0; border-bottom: 8px solid #bbb; }
-    .pencil-body { width: 100%; height: 280px; background: #ffd93d; border-left: 8px solid #fbc02d; border-right: 8px solid #fbc02d; }
-    .pencil-shaved { position: relative; width: 0; height: 0; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 45px solid #e0c29d; }
-    .pencil-lead { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 15px solid #333; }
 
     /* 📖 일기장 내지 */
     .register-paper {
@@ -43,16 +40,16 @@
       background-image: radial-gradient(circle, #ddd 7px, transparent 8px); background-size: 100% 45px;
     }
 
-    h1 { font-family: 'Gaegu', cursive; font-size: 3rem; color: var(--point-coral); margin-bottom: 30px; text-align: center; }
+    h1 { font-family: 'Noto Sans KR', serif; font-size: 2.5rem; font-weight: 700; color: var(--point-coral); margin-bottom: 30px; text-align: center; }
 
     /* 폼 스타일 커스텀 */
-    .form-label { font-size: 1.4rem; color: #666; font-weight: bold; margin-bottom: 10px; display: block; }
+    .form-label { font-size: 1.1rem; color: #666; font-weight: bold; margin-bottom: 10px; display: block; }
     
     .form-control {
-      font-family: 'Gamja Flower', cursive;
-      font-size: 1.3rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.05rem;
       border: none;
-      border-bottom: 2px dashed #ddd; /* 선 위에 쓰는 느낌 */
+      border-bottom: 2px dashed #ddd;
       border-radius: 0;
       background-color: transparent;
       padding: 10px 5px;
@@ -76,7 +73,7 @@
     .btn-submit {
       width: 100%;
       padding: 15px;
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       background-color: #ffd93d;
       border: 3px solid #fff;
       border-radius: 50px;
@@ -105,13 +102,61 @@
 <body>
 
 <div class="container">
-  <div class="pencil-case">
-    <div class="pencil-eraser"></div>
-    <div class="pencil-body"></div>
-    <div class="pencil-shaved">
-      <div class="pencil-lead"></div>
-    </div>
-  </div>
+
+  <!-- 🖊 SVG 투명 볼펜 -->
+  <svg class="pen-decoration" width="28" height="420" viewBox="0 0 28 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="clearBody" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(200,200,200,0.3)"/>
+        <stop offset="25%" stop-color="rgba(255,255,255,0.5)"/>
+        <stop offset="50%" stop-color="rgba(255,255,255,0.7)"/>
+        <stop offset="75%" stop-color="rgba(255,255,255,0.4)"/>
+        <stop offset="100%" stop-color="rgba(200,200,200,0.3)"/>
+      </linearGradient>
+    </defs>
+
+    <!-- 노크 버튼 (상단) -->
+    <rect x="9" y="0" width="10" height="25" rx="2" fill="#ddd"/>
+    <rect x="9" y="0" width="10" height="25" rx="2" stroke="#bbb" stroke-width="0.5" fill="none"/>
+    <rect x="12" y="3" width="3" height="10" rx="1" fill="white" opacity="0.3"/>
+
+    <!-- 클립 -->
+    <path d="M22,10 L26,10 L26,70 L22,65" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- 투명 몸통 (외벽) -->
+    <rect x="4" y="25" width="20" height="310" rx="3" fill="url(#clearBody)"/>
+    <rect x="4" y="25" width="20" height="310" rx="3" stroke="#ccc" stroke-width="0.8" fill="none"/>
+
+    <!-- 몸통 하이라이트 (투명 광택) -->
+    <rect x="7" y="25" width="4" height="310" rx="1" fill="white" opacity="0.25"/>
+
+    <!-- 잉크 심 (파란 잉크가 보이는 부분) -->
+    <rect x="11" y="40" width="6" height="220" rx="2" fill="#5C3A1E" opacity="0.85"/>
+    <!-- 잉크 심 하이라이트 -->
+    <rect x="12" y="40" width="2" height="220" rx="1" fill="white" opacity="0.2"/>
+    <!-- 잉크 잔량선 -->
+    <line x1="11" y1="165" x2="17" y2="165" stroke="#3E2510" stroke-width="0.5" opacity="0.4"/>
+
+    <!-- 그립부 (고무 그립) -->
+    <rect x="5" y="295" width="18" height="40" rx="2" fill="#bbb" opacity="0.4"/>
+    <rect x="5" y="295" width="18" height="40" rx="2" stroke="#aaa" stroke-width="0.5" fill="none"/>
+    <!-- 그립 줄무늬 -->
+    <line x1="6" y1="302" x2="22" y2="302" stroke="#aaa" stroke-width="0.4" opacity="0.5"/>
+    <line x1="6" y1="308" x2="22" y2="308" stroke="#aaa" stroke-width="0.4" opacity="0.5"/>
+    <line x1="6" y1="314" x2="22" y2="314" stroke="#aaa" stroke-width="0.4" opacity="0.5"/>
+    <line x1="6" y1="320" x2="22" y2="320" stroke="#aaa" stroke-width="0.4" opacity="0.5"/>
+    <line x1="6" y1="326" x2="22" y2="326" stroke="#aaa" stroke-width="0.4" opacity="0.5"/>
+
+    <!-- 펜촉 콘 (좁아지는 부분) -->
+    <path d="M5,335 L23,335 L17,400 L11,400 Z" fill="url(#clearBody)"/>
+    <path d="M5,335 L23,335 L17,400 L11,400 Z" stroke="#ccc" stroke-width="0.6" fill="none"/>
+    <!-- 콘 안의 잉크심 -->
+    <path d="M12,335 L16,335 L15,395 L13,395 Z" fill="#5C3A1E" opacity="0.6"/>
+
+    <!-- 볼펜 팁 (금속) -->
+    <path d="M11,400 L17,400 L14,418 Z" fill="#999"/>
+    <path d="M11,400 L14,418 L14,400 Z" fill="#888"/>
+  </svg>
 
   <div class="register-paper">
     <h1>오늘의 기록 🖍</h1>

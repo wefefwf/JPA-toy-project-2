@@ -22,10 +22,10 @@
     }
     .container { max-width: 800px; position: relative; }
 
-    /* ✏️ SVG 연필 */
+    /* ✏️ SVG 연필 - 왼쪽 아래, 흑연이 위를 향함 */
     .pencil-decoration {
-      position: absolute; top: -20px; right: -70px;
-      transform: rotate(12deg); z-index: 100;
+      position: absolute; bottom: -30px; left: -90px;
+      transform: rotate(195deg); z-index: 100;
       filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.10));
     }
 
@@ -76,7 +76,7 @@
 
 <div class="container">
 
-  <!-- ✏️ SVG 연필 (read.html과 동일) -->
+  <!-- ✏️ SVG 연필 (동일한 연필, 위치/각도만 변경) -->
   <svg class="pencil-decoration" width="34" height="420" viewBox="0 0 34 420" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">

@@ -24,7 +24,7 @@
 | :--- | :--- |
 | **Backend** | Java 17, Spring Boot 3.x |
 | **ORM** | Spring Data JPA |
-| **Database** | MariaDB / MySQL |
+| **Database** | MariaDB |
 | **Frontend** | Thymeleaf, Bootstrap 5, CSS3, SVG |
 | **Fonts** | Google Fonts (Noto Sans KR, Noto Serif KR) |
 

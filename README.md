@@ -2,7 +2,7 @@
 
 > **"오늘 하루는 어떤 색이었나요? 삐뚤삐뚤해도 괜찮아, 소중한 순간을 그려보아요!"**
 >
-> Spring Boot 3와 JPA를 활용해 만든, 따스한 **어린 시절 스케치북 감성**의 다이어리 프로젝트입니다.
+> Spring Boot와 JPA를 활용해 만든, 따스한 **어린 시절 스케치북 감성**의 다이어리 프로젝트입니다.
 
 ---
 
@@ -25,7 +25,7 @@
 | **Backend** | Java 17, Spring Boot 3.x |
 | **ORM** | Spring Data JPA |
 | **Database** | MariaDB |
-| **Frontend** | Thymeleaf, Bootstrap 5, CSS3, SVG |
+| **Frontend** | Thymeleaf, Bootstrap 5, CSS,|
 | **Fonts** | Google Fonts (Noto Sans KR, Noto Serif KR) |
 
 ---
